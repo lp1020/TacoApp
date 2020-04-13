@@ -1,0 +1,2 @@
+class IngcatsController < ApplicationController
+end
