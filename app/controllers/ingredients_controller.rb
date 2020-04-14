@@ -1,7 +1,11 @@
 class IngredientsController < ApplicationController
    def index
-    @ingredients = Ingredient.all
-    render json: { ingredients: @ingredients }
+    @taco = Taco.find(params[:taco_id])
+    @ingcat = Ingcat.find_by(id: @taco.ingcat_id)
+    @ingredients = @taco.ingredients
+    render :json => {:taco => @taco,
+              :ingcat => @ingcat,
+             :ingredients => @ingredients}
   end
 
    def show
@@ -23,6 +27,12 @@ class IngredientsController < ApplicationController
   def destroy
     @ingredient = Ingredient.destroy(params[:id])
     render json: { ingredient: @ingredient }
+  end
+
+   def update
+    @ingredient = Ingredient.find(params[:id])
+    @ingredient.update(ingredient_params)
+    respond_with Ingredient, json: ingredient
   end
 end
 

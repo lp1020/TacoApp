@@ -1,5 +1,5 @@
 class TacocatsController < ApplicationController
    def index
-    @tacocats = Tacocast.all
+    @tacocats = Tacocats.all
   end
 end
